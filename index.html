@@ -239,29 +239,25 @@ with a fine-partition histogram.</p>
 <li>Sample for which you want to calculate a density</li>
 </ul>
 </li>
-<li><code>range</code><ul>
+<li>
+<p><code>range</code></p>
+<ul>
 <li>Range of points to calculate the density at (partition of the histogram)</li>
-<li>By default, uses <code>extendrange</code> to extend the maximum/minimum of the <code>data</code>
-<code>julia
+<li>By default, uses <code>extendrange</code> to extend the maximum/minimum of the <code>data</code></li>
+</ul>
+<p><code>julia
 function extendrange(y, s = 0.5, n = 150)
     σ = std(y)
     linspace(minimum(y) - s * σ, maximum(y) + s * σ, n)
-end</code></li>
-</ul>
-</li>
-<li><code>m</code><ul>
-<li>Smoothing parameter (number of adjacent bins to smooth over)</li>
-</ul>
-</li>
-<li><code>kernel</code><ul>
-<li>Smoothing kernel to use.  Kernels provided by AverageShiftedHistograms are within
-a <code>Kernels</code> module to help avoid potential name conflicts.  </li>
-<li>Users can provide their own function to use.  The function should be strictly
- nonnegative, symmetric around 0, but not necessarily integrate to 1<ul>
-<li><code>gaussian(u) = exp(-0.5 * u ^ 2)</code> (already in <code>Kernels</code>) is a valid kernel.</li>
-</ul>
-</li>
-</ul>
+end</code>
+- <code>m</code>
+- Smoothing parameter (number of adjacent bins to smooth over)
+- <code>kernel</code>
+- Smoothing kernel to use.  Kernels provided by AverageShiftedHistograms are within
+a <code>Kernels</code> module to help avoid potential name conflicts.<br />
+- Users can provide their own function to use.  The function should be strictly
+ nonnegative, symmetric around 0, but not necessarily integrate to 1
+    - <code>gaussian(u) = exp(-0.5 * u ^ 2)</code> (already in <code>Kernels</code>) is a valid kernel.</p>
 </li>
 </ul>
 <div class="code"><pre><span></span><span class="k">using</span> <span class="n">AverageShiftedHistograms</span>
