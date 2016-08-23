@@ -1,0 +1,14 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "AverageShiftedHistograms.jl\n\n\nMy docs", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/#averageshiftedhistogramsjl", 
+            "text": "My docs", 
+            "title": "AverageShiftedHistograms.jl"
+        }
+    ]
+}
