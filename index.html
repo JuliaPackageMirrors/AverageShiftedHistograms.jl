@@ -66,6 +66,22 @@
       </style>
     
     
+      <link rel="stylesheet" href="./site/assets/stylesheets/application-0dac3e5884.css">
+    
+      <link rel="stylesheet" href="./site/assets/stylesheets/application.css">
+    
+      <link rel="stylesheet" href="./site/assets/stylesheets/palettes-05ab2406df.css">
+    
+      <link rel="stylesheet" href="./site/assets/stylesheets/palettes.css">
+    
+      <link rel="stylesheet" href="./site/site/assets/stylesheets/application-0dac3e5884.css">
+    
+      <link rel="stylesheet" href="./site/site/assets/stylesheets/application.css">
+    
+      <link rel="stylesheet" href="./site/site/assets/stylesheets/palettes-05ab2406df.css">
+    
+      <link rel="stylesheet" href="./site/site/assets/stylesheets/palettes.css">
+    
     <script src="./assets/javascripts/modernizr-4ab42b99fd.js"></script>
     
   </head>
@@ -210,7 +226,13 @@
         <div class="wrapper">
           
           <h1 id="averageshiftedhistogramsjl">AverageShiftedHistograms.jl</h1>
-<p>My docs</p>
+<p>An Average Shifted Histogram (ASH) estimator is essentially a kernel density calculated
+with a fine-partition histogram.</p>
+<h1 id="univariate">Univariate</h1>
+<div class="code"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="mi">100_000</span><span class="p">)</span>
+
+<span class="n">o</span> <span class="o">=</span> <span class="n">ash</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">:</span><span class="o">.</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
           <aside class="copyright" role="note">
             
             Documentation built with
