@@ -229,47 +229,10 @@
 <p>An Average Shifted Histogram (ASH) estimator is essentially a kernel density calculated
 with a fine-partition histogram.</p>
 <h1 id="univariate">Univariate</h1>
-<p>The main function exported by AverageShiftedHistograms is <code>ash</code>.</p>
-<div class="code"><pre><span></span><span class="n">ash</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">range</span> <span class="o">=</span> <span class="n">extendrange</span><span class="p">(</span><span class="n">data</span><span class="p">);</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">kernel</span> <span class="o">=</span> <span class="n">Kernels</span><span class="o">.</span><span class="n">biweight</span><span class="p">)</span>
-</pre></div>
-
-
-<ul>
-<li><code>data</code><ul>
-<li>Sample for which you want to calculate a density</li>
-</ul>
-</li>
-<li><code>range</code><ul>
-<li>Range of points to calculate the density at (partition of the histogram)</li>
-</ul>
-</li>
-<li><code>m</code><ul>
-<li>Smoothing parameter (number of adjacent bins to smooth over)</li>
-</ul>
-</li>
-<li><code>kernel</code><ul>
-<li>Smoothing kernel to use.  Kernels provided by AverageShiftedHistograms are within
-a <code>Kernels</code> module to help avoid potential name conflicts.  </li>
-<li>Users can provide their own function to use.  The function should be strictly
- nonnegative, symmetric around 0, but not necessarily integrate to 1<ul>
-<li><code>gaussian(u) = exp(-0.5 * u ^ 2)</code> (already in <code>Kernels</code>) is a valid kernel.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<div class="code"><pre><span></span><span class="k">using</span> <span class="n">AverageShiftedHistograms</span>
-<span class="k">using</span> <span class="n">Plots</span><span class="p">;</span> <span class="n">gr</span><span class="p">()</span>
-
-<span class="n">y</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="mi">100_000</span><span class="p">)</span>
+<div class="code"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="mi">100_000</span><span class="p">)</span>
 
 <span class="n">o</span> <span class="o">=</span> <span class="n">ash</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">:</span><span class="o">.</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">)</span>
-
-<span class="n">plot</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
 </pre></div>
-
-
-<p><img alt="" src="https://cloud.githubusercontent.com/assets/8075494/17912630/9267e1c0-6949-11e6-92d8-c2d93f96707b.png" /></p>
           <aside class="copyright" role="note">
             
             Documentation built with
