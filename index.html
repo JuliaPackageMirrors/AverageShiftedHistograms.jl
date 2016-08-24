@@ -223,6 +223,12 @@
               </a>
             </li>
           
+            <li class="anchor">
+              <a title="Methods" href="#methods">
+                Methods
+              </a>
+            </li>
+          
         </ul>
       
     
@@ -359,6 +365,25 @@ a <code>Kernels</code> module to help avoid potential name conflicts.  </li>
 
 
 <p><img alt="" src="https://cloud.githubusercontent.com/assets/8075494/17917725/df56f456-6973-11e6-9347-abc82e262a82.png" /></p>
+<hr />
+<h2 id="methods">Methods</h2>
+<p>Suppose <code>o = ash(x)</code>, <code>o2 = ash(x, y)</code></p>
+<ul>
+<li>Change smoothing parameter(s) and/or kernel(s)</li>
+</ul>
+<div class="code"><pre><span></span><span class="n">ash!</span><span class="p">(</span><span class="n">o</span><span class="p">;</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">kernel</span> <span class="o">=</span> <span class="n">Kernels</span><span class="o">.</span><span class="n">epanechnikov</span><span class="p">)</span>
+
+<span class="n">ash!</span><span class="p">(</span><span class="n">o2</span><span class="p">;</span> <span class="n">mx</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">my</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">kernely</span> <span class="o">=</span> <span class="n">Kernels</span><span class="o">.</span><span class="n">epanechnikov</span><span class="p">)</span>
+</pre></div>
+
+
+<ul>
+<li>Update the estimate by adding more data</li>
+</ul>
+<div class="code"><pre><span></span><span class="n">fit!</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="n">fit!</span><span class="p">(</span><span class="n">o2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
           <aside class="copyright" role="note">
             
             Documentation built with
