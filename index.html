@@ -211,6 +211,18 @@
               </a>
             </li>
           
+            <li class="anchor">
+              <a title="Bivariate Usage" href="#bivariate-usage">
+                Bivariate Usage
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Bivariate Toy Example" href="#bivariate-toy-example">
+                Bivariate Toy Example
+              </a>
+            </li>
+          
         </ul>
       
     
@@ -247,34 +259,25 @@ with a fine-partition histogram.</p>
 <hr />
 <h2 id="univariate-usage">Univariate Usage</h2>
 <p>The main function exported by AverageShiftedHistograms is <code>ash</code>.</p>
-<div class="code"><pre><span></span><span class="n">ash</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">range</span> <span class="o">=</span> <span class="n">extendrange</span><span class="p">(</span><span class="n">data</span><span class="p">);</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">kernel</span> <span class="o">=</span> <span class="n">Kernels</span><span class="o">.</span><span class="n">biweight</span><span class="p">)</span>
+<div class="code"><pre><span></span><span class="n">ash</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">rng</span> <span class="o">=</span> <span class="n">extendrange</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">kernel</span> <span class="o">=</span> <span class="n">Kernels</span><span class="o">.</span><span class="n">biweight</span><span class="p">,</span> <span class="n">warnout</span> <span class="o">=</span> <span class="n">true</span><span class="p">)</span>
 </pre></div>
 
 
 <ul>
-<li><code>data</code><ul>
+<li><code>x</code><ul>
 <li>Sample for which you want to calculate a density</li>
 </ul>
 </li>
-<li><code>range</code><ul>
+<li><code>rng = extendrange(x)</code><ul>
 <li>Range of points to calculate the density at (partition of the histogram)</li>
-<li>By default, uses <code>extendrange</code> to extend the maximum/minimum of the <code>data</code></li>
+<li>By default, uses <code>extendrange</code> to extend the maximum/minimum of the <code>x</code></li>
 </ul>
 </li>
-</ul>
-<div class="code"><pre><span></span><span class="k">function</span><span class="nf"> extendrange</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">150</span><span class="p">)</span>
-    <span class="n">σ</span> <span class="o">=</span> <span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-    <span class="n">linspace</span><span class="p">(</span><span class="n">minimum</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">s</span> <span class="o">*</span> <span class="n">σ</span><span class="p">,</span> <span class="n">maximum</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="n">s</span> <span class="o">*</span> <span class="n">σ</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-<span class="k">end</span>
-</pre></div>
-
-
-<ul>
-<li><code>m</code><ul>
+<li><code>m = 5</code><ul>
 <li>Smoothing parameter (number of adjacent bins to smooth over)</li>
 </ul>
 </li>
-<li><code>kernel</code><ul>
+<li><code>kernel = Kernels.biweight</code><ul>
 <li>Smoothing kernel to use.  Kernels provided by AverageShiftedHistograms are within
 a <code>Kernels</code> module to help avoid potential name conflicts.  </li>
 <li>Users can provide their own function to use.  The function should be strictly
@@ -282,6 +285,10 @@ a <code>Kernels</code> module to help avoid potential name conflicts.  </li>
 <li><code>gaussian(u) = exp(-0.5 * u ^ 2)</code> (already in <code>Kernels</code>) is a valid kernel.</li>
 </ul>
 </li>
+</ul>
+</li>
+<li><code>warnout = true</code><ul>
+<li>print a warning if the estimated density is nonzero outside of <code>rng</code></li>
 </ul>
 </li>
 </ul>
@@ -299,6 +306,59 @@ a <code>Kernels</code> module to help avoid potential name conflicts.  </li>
 
 
 <p><img alt="" src="https://cloud.githubusercontent.com/assets/8075494/17912630/9267e1c0-6949-11e6-92d8-c2d93f96707b.png" /></p>
+<div class="code"><pre><span></span><span class="c"># BEWARE OVERSMOOTHING!</span>
+<span class="n">o</span> <span class="o">=</span> <span class="n">ash</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">:</span><span class="o">.</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="" src="https://cloud.githubusercontent.com/assets/8075494/17917468/bfd17c2a-6971-11e6-9ffd-93baee75f5a7.png" /></p>
+<hr />
+<h2 id="bivariate-usage">Bivariate Usage</h2>
+<div class="code"><pre><span></span><span class="n">ash</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span> <span class="n">kw</span><span class="o">...</span><span class="p">)</span>
+<span class="n">ash</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">rngx</span><span class="p">,</span> <span class="n">rngy</span><span class="p">;</span> <span class="n">kw</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+
+
+<ul>
+<li><code>x</code>, <code>y</code><ul>
+<li>The bivariate data series (each is an AbstractVector)</li>
+</ul>
+</li>
+<li><code>rngx</code>, <code>rngy</code><ul>
+<li>The histogram partition for <code>x</code> and <code>y</code>, respectively</li>
+</ul>
+</li>
+<li><code>kw...</code> Keyword arguments are<ul>
+<li><code>mx = 5</code>, <code>my = 5</code><ul>
+<li>Smoothing parameters for <code>x</code> and <code>y</code></li>
+</ul>
+</li>
+<li><code>kernelx = Kernels.biweight</code>, <code>kernely = Kernels.biweight</code><ul>
+<li>Smoothing kernels for <code>x</code> and <code>y</code></li>
+</ul>
+</li>
+<li><code>warnout = true</code><ul>
+<li>Print warning if density is nonzero on the edge of <code>rngx</code> or <code>rngy</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="bivariate-toy-example">Bivariate Toy Example</h2>
+<div class="code"><pre><span></span><span class="k">using</span> <span class="n">AverageShiftedHistograms</span>
+<span class="k">using</span> <span class="n">Plots</span><span class="p">;</span> <span class="n">gr</span><span class="p">()</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="mi">10_000</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="mi">10_000</span><span class="p">)</span>
+
+<span class="n">o</span> <span class="o">=</span> <span class="n">ash</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">plot</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="" src="https://cloud.githubusercontent.com/assets/8075494/17917581/9739788e-6972-11e6-9071-e4eea233da56.png" /></p>
           <aside class="copyright" role="note">
             
             Documentation built with
